@@ -1,5 +1,7 @@
 import express from 'express';
 const router = express.Router();
+import validateUser from '../middleware/searchForm.js';
+
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -49,6 +51,10 @@ router.get('/results', (req, res, next) => {
   }
 });
 
- 
+
+router.post('/search', validateUser, (req, res) => {
+    console.log('Search route hit');
+    res.send('Search completed');
+});
 
 export default router;
