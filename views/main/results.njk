@@ -1,0 +1,28 @@
+{% extends "base.njk" %}
+
+{% block pageTitle %}Results Page - {{ config.SERVICE_NAME }}{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">Results Page</h1>
+  <div class="govuk-grid-row">
+    {% for duck in result %}
+      <div class="govuk-grid-column-full govuk-!-margin-bottom-6">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-third">
+            <img src="{{ duck.image }}" alt="Duck Image" style="max-width: 100%;" class="govuk-!-margin-bottom-4" />
+          </div>
+          <div class="govuk-grid-column-two-thirds">
+            <h2 class="govuk-heading-l">Duck Name: {{ duck.name }}</h2>
+            <p class="govuk-body">Duck Location: {{ duck.location }}</p>
+            <p class="govuk-body">Category:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              {% for cat in duck.category %}
+                <li>{{ cat }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
