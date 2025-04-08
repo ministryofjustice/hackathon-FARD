@@ -34,20 +34,14 @@ router.get('/results', async (req, res) => {
   // Call API with user inputs
   try {
     const response = await req.axiosMiddleware.get(
-      '/api',
-      {
-        email_address: formData.email,
-        template_id: templateId,
-        personalisation: { 
-          name: formData.yourName, 
-          typeOfProblem: formData.problemDescription, 
-          moreDetail: formData.moreDetail || "No additional information entered"
-        }, 
-      },
+      'http://localhost:3000/api',{
+      }
     );
 
+    console.log(response)
     res.render('main/results', response);
   } catch  {
+    res.render('', response);
     console.log('error')
   }
 });
