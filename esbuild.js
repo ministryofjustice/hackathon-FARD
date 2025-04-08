@@ -184,9 +184,6 @@ const build = async () => {
     // Copy assets
     await copyGovukAssets();
 
-    // copy over images
-    await copyCustomAssets();
-
     // Build SCSS
     await buildScss();
 
