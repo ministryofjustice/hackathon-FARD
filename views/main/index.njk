@@ -2,6 +2,8 @@
 
 {% block content %}
     <h1 class="govuk-heading-xl">{{config.SERVICE_NAME}}</h1>
+    <form action="/search" method="post">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
     {{ govukSelect({
         id: 'location',
         name: 'location',
@@ -76,4 +78,5 @@
         classes: "govuk-!-margin-bottom-2",
         id: "searchButton"
     }) }}
+    </form>
 {% endblock %}
