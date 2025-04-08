@@ -8,6 +8,45 @@ router.get('/', (req, res) => {
   res.render('main/index');
 });
 
+
+router.post('/search', validateUser, (req, res) => {
+  console.log("hitting search page")
+  // // Extract form data from the request body
+  // const { duckName, location, duckCategory } = req.body;
+  
+
+  // // Prepare query string
+  // const queryString = new URLSearchParams({
+  //   duckName,
+  //   location,
+  //   duckCategory: Array.isArray(duckCategory) ? duckCategory.join(',') : duckCategory
+  // }).toString();
+
+  // // Redirect to the results page with query parameters
+  // res.redirect(`/results?${queryString}`);
+
+  res.redirect('/results');
+});
+
+// GET results page
+router.get('/results', async (req, res) => {
+  console.log("hitting results page")
+  // Call API with user inputs
+  try {
+    const response = await req.axiosMiddleware.get(
+      'http://localhost:3000/api',{
+      }
+    );
+
+    console.log(response)
+    res.render('main/results', response);
+  } catch  {
+    res.render('', response);
+    console.log('error')
+  }
+});
+
+
 // GET a simulated api call
 router.get('/api', (req, res) => {
   const ducks = [
@@ -23,53 +62,7 @@ router.get('/api', (req, res) => {
     { image: "/assets/images/duck_fishing.png", name: 'Mallard duck', location: 'Moon', category: 'Hooded Merganser duck' },
   ];
 
-  if (req.headers.accept.includes('application/json')) {
-    return res.json(ducks);
-  }
-
-  res.render('main/results', {ducks});
-});
-
-
-// GET results page
-router.get('/results', (req, res, next) => {
-  // Call API with user inputs
-  try {
-    const { image, duckName, location, duckCategory } = req.query;
-    console.log(req.query, "QUERY")
-
-    const result = [
-      {
-        image: image,
-        name: duckName,
-        location: location,
-        category: duckCategory.split(',')
-      }
-    ];
-    console.log(result, "RESULT")
-
-    res.render('main/results', { result });
-  } catch (error) {
-    next(error);
-  }
-});
-
-
-router.post('/search', validateUser, (req, res) => {
-  console.log('Search route hit with validator');
-
-  // Extract form data from the request body
-  const { duckName, location, duckCategory } = req.body;
-
-  // Prepare query string
-  const queryString = new URLSearchParams({
-    duckName,
-    location,
-    duckCategory: Array.isArray(duckCategory) ? duckCategory.join(',') : duckCategory
-  }).toString();
-
-  // Redirect to the results page with query parameters
-  res.redirect(`/results?${queryString}`);
+  res.json(ducks);
 });
 
 export default router;

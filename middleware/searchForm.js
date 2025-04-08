@@ -31,11 +31,6 @@ const validateUser = [
             return false;
         })
         .withMessage('Duck category must contain one or more valid selections.'),
-    // Tags: Non-empty array
-    body('filters')
-        .isArray({ min: 1 }).withMessage('Filters must be a non-empty array.')
-        .custom((tags) => tags.every(tag => typeof tag === 'string' && tag.trim() !== ''))
-        .withMessage('Filters must contain non-empty strings.'),
 
     // Error Handling Middleware
     (req, res, next) => {
