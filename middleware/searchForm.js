@@ -3,7 +3,7 @@ import { body, validationResult } from 'express-validator';
 
 const validateUser = [
     // Name: Non-empty string
-    body('name')
+    body('duckName')
         .trim()
         .isString().withMessage('Name must be a string.')
         .not().isEmpty().withMessage('Name cannot be an empty string.'),
@@ -15,7 +15,7 @@ const validateUser = [
         .not().isEmpty().withMessage('Location cannot be an empty string.'),
 
     // Tags: Non-empty array
-    body('filters')
+    body('duckCategory')
         .isArray({ min: 1 }).withMessage('Filters must be a non-empty array.')
         .custom((tags) => tags.every(tag => typeof tag === 'string' && tag.trim() !== ''))
         .withMessage('Filters must contain non-empty strings.'),
