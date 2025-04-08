@@ -14,11 +14,23 @@ const validateUser = [
         .isString().withMessage('Location must be a string.')
         .not().isEmpty().withMessage('Location cannot be an empty string.'),
 
-    // Tags: Non-empty array
+    // Duck Category: Handles both single checkbox value and an array of values
     body('duckCategory')
-        .isArray({ min: 1 }).withMessage('Filters must be a non-empty array.')
-        .custom((tags) => tags.every(tag => typeof tag === 'string' && tag.trim() !== ''))
-        .withMessage('Filters must contain non-empty strings.'),
+        .custom((value) => {
+            // Handle the case when a single checkbox is selected (string)
+            if (typeof value === 'string' && value.trim() !== '') {
+                return true;
+            }
+
+            // Handle the case when multiple checkboxes are selected (array)
+            if (Array.isArray(value) && value.length > 0) {
+                return value.every(item => typeof item === 'string' && item.trim() !== '');
+            }
+
+            // If none of the above, validation fails
+            return false;
+        })
+        .withMessage('Duck category must contain one or more valid selections.'),
 
     // Error Handling Middleware
     (req, res, next) => {
