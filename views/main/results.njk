@@ -16,8 +16,8 @@
             <p class="govuk-body">Duck Location: {{ duck.location }}</p>
             <p class="govuk-body">Category:</p>
             <ul class="govuk-list govuk-list--bullet">
-              {% for cat in duck.category %}
-                <li>{{ cat }}</li>
+              {% for duck in duck.category %}
+                <li>{{ duck }}</li>
               {% endfor %}
             </ul>
           </div>
