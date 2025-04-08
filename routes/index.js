@@ -58,4 +58,9 @@ router.get('/results', (req, res, next) => {
 
 
 
+router.post('/search', validateUser, (req, res) => {
+    console.log('Search route hit');
+    res.send('Search completed');
+});
+
 export default router;
