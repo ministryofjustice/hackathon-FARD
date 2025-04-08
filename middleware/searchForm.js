@@ -3,7 +3,7 @@ import { body, validationResult } from 'express-validator';
 
 const validateUser = [
     // Name: Non-empty string
-    body('name')
+    body('duckName')
         .trim()
         .isString().withMessage('Name must be a string.')
         .not().isEmpty().withMessage('Name cannot be an empty string.'),
