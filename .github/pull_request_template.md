@@ -1,31 +1,16 @@
-[Jira ticket (if applicable)](https://www.atlassian.com/software/jira)
-
-[Trello link (if applicable)](https://trello.com)
-
 ## What changed and Why?
-
-<!-- EXAMPLE, fill this in
 
 I have added/removed/altered:
 
 - [ ] Added foo in bar
-- [ ] Removed baz
 
 I am doing this because:
 
 -
--
-- 
-
--->
 
 ## Guidance to review (optional)
 
-<!-- Provide any useful context for the reviewer:  
-- Key areas to focus on in the review
-- Any known issues or limitations  
-- Dependencies or related changes to consider
--->
+- n/a
 
 ## Checklist
 
