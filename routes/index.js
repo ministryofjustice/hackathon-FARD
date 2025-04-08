@@ -25,4 +25,26 @@ router.post('/search', validateUser, (req, res) => {
     res.send('Search completed');
 });
 
+// GET results page
+router.get('/results', (req, res, next) => {
+  try {
+    const { image, name, location, category } = req.query;
+
+    const result = [
+      {
+        image: image || "/images/default-duck.png",
+        name: name || "No Name Provided",
+        location: location || "No Location Provided",
+        category: category || ["No Categories Provided"]
+      }
+    ];
+
+    res.render('main/results', { result });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
 export default router;
