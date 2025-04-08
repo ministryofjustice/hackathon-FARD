@@ -165,6 +165,9 @@ const build = async () => {
   try {
     console.log('🚀 Starting build process...');
 
+    // Copy assets
+    await copyGovukAssets();
+
     // Build SCSS
     await buildScss();
 
