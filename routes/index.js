@@ -31,11 +31,6 @@ router.get('/api', (req, res) => {
 });
 
 
-router.post('/search', validateUser, (req, res) => {
-    console.log('Search route hit');
-    res.send('Search completed');
-});
-
 // GET results page
 router.get('/results', (req, res, next) => {
   try {
@@ -55,7 +50,6 @@ router.get('/results', (req, res, next) => {
     next(error);
   }
 });
-
 
 
 router.post('/search', validateUser, (req, res) => {

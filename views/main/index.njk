@@ -1,86 +1,79 @@
 {% extends "base.njk" %}
 
 {% block content %}
-    <form method="post" action="/search">
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-        <h1 class="govuk-heading-xl">{{ config.SERVICE_NAME }}</h1>
-
-        {{ govukSelect({
-            id: 'location',
-            name: 'location',
-            classes: 'govuk-!-width-one-third',
-            label: {
-                text: "Location",
-                classes: 'govuk-label--s'
+    <h1 class="govuk-heading-xl">{{config.SERVICE_NAME}}</h1>
+    {{ govukSelect({
+        id: 'location',
+        name: 'location',
+        classes: 'govuk-!-width-one-third',
+        label: {
+            text: "Location",
+            classes: 'govuk-label--s'
+        },
+        items: [
+            {
+            value: "mercury",
+            text: "Mercury"
             },
-            items: [
-                {
-                    value: "mercury",
-                    text: "Mercury"
-                },
-                {
-                    value: "venus",
-                    text: "Venus"
-                },
-                {
-                    value: "earth",
-                    text: "Earth"
-                },
-                {
-                    value: "mars",
-                    text: "Mars"
-                }
-            ]
-        }) }}
-
-        {{ govukInput({
-            id: 'duck_name',
-            name: 'duckName',
-            label: {
-                text: 'Name',
-                classes: 'govuk-label--s'
+            {
+            value: "venus",
+            text: "Venus"
             },
-            attributes: {
-                maxLength: 100
+            {
+            value: "earth",
+            text: "Earth"
             },
-            classes: 'govuk-!-width-one-third'
-        }) }}
-
-        {{ govukCheckboxes({
-            name: "duckCategory",
-            fieldset: {
-                legend: {
-                    text: "Category of duck",
-                    isPageHeading: false,
-                    classes: "govuk-fieldset__legend--s"
-                }
+            {
+            value: "mars",
+            text: "Mars"
+            }
+        ]
+    }) }}
+    {{ govukInput({
+        id: 'duck_name',
+        name: 'duckName',
+        label: {
+            text: 'Name',
+            classes: 'govuk-label--s'
+        },
+        attributes: {
+            maxLength: 100
+        },
+            
+        classes: 'govuk-!-width-one-third'
+    }) }}
+    {{ govukCheckboxes({
+        name: "duckCategory",
+        fieldset: {
+            legend: {
+            text: "Category of duck",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--s"
+            }
+        },
+        items: [
+            {
+            value: "astronaut",
+            text: "Astronaut duck"
             },
-            items: [
-                {
-                    value: "astronaut",
-                    text: "Astronaut duck"
-                },
-                {
-                    value: "alien",
-                    text: "Alien duck"
-                },
-                {
-                    value: "rocket",
-                    text: "Rocket duck"
-                },
-                {
-                    value: "human",
-                    text: "Human duck"
-                }
-            ]
-        }) }}
-
-        {{ govukButton({
-            text: 'Search',
-            type: "submit",
-            classes: "govuk-!-margin-bottom-2",
-            id: "searchButton"
-        }) }}
-    </form>
+            {
+            value: "alien",
+            text: "Alien duck"
+            },
+            {
+            value: "rocket",
+            text: "Rocket duck"
+            },
+            {
+            value: "human",
+            text: "Human duck"
+            }
+        ]
+    }) }}
+    {{ govukButton({
+        text: 'Search',
+        type: "submit",
+        classes: "govuk-!-margin-bottom-2",
+        id': "searchButton"
+    }) }}
 {% endblock %}
-
