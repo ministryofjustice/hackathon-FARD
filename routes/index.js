@@ -33,17 +33,20 @@ router.get('/api', (req, res) => {
 
 // GET results page
 router.get('/results', (req, res, next) => {
+  // Call API with user inputs
   try {
-    const { image, name, location, category } = req.query;
+    const { image, duckName, location, duckCategory } = req.query;
+    console.log(req.query, "QUERY")
 
     const result = [
       {
-        image: image || "/images/default-duck.png",
-        name: name || "No Name Provided",
-        location: location || "No Location Provided",
-        category: category || ["No Categories Provided"]
+        image: image,
+        name: duckName,
+        location: location,
+        category: duckCategory.split(',')
       }
     ];
+    console.log(result, "RESULT")
 
     res.render('main/results', { result });
   } catch (error) {
@@ -53,8 +56,20 @@ router.get('/results', (req, res, next) => {
 
 
 router.post('/search', validateUser, (req, res) => {
-    console.log('Search route hit');
-    res.send('Search completed');
+  console.log('Search route hit with validator');
+
+  // Extract form data from the request body
+  const { duckName, location, duckCategory } = req.body;
+
+  // Prepare query string
+  const queryString = new URLSearchParams({
+    duckName,
+    location,
+    duckCategory: Array.isArray(duckCategory) ? duckCategory.join(',') : duckCategory
+  }).toString();
+
+  // Redirect to the results page with query parameters
+  res.redirect(`/results?${queryString}`);
 });
 
 export default router;
